@@ -25,6 +25,7 @@ DEALINGS IN THE SOFTWARE.
 """
 
 import asyncio
+import re
 from collections import namedtuple
 from typing import Union
 
@@ -36,6 +37,7 @@ User = namedtuple('User', ('id', 'login', 'display_name', 'type', 'broadcaster_t
                            'profile_image', 'offline_image', 'view_count'))
 Chatters = namedtuple('Chatters', ('count', 'all', 'broadcaster', 'vips', 'moderators', 'staff',
                                    'admins', 'global_mods', 'viewers'))
+thumbnail_re = re.compile('https://static-cdn.jtvnw.net/previews-ttv/live_user_(?P<login>.+)-{width}x{height}.jpg')
 
 
 class Client:
@@ -129,7 +131,11 @@ class Client:
             Bad request while fetching streams.
         """
 
-        return await self.http.get_streams(game_id=game_id, language=language, channels=channels, limit=limit)
+        res = await self.http.get_streams(game_id=game_id, language=language, channels=channels, limit=limit)
+        for stream in res:
+            t_url = stream['thumbnail_url']
+            stream['login'] = thumbnail_re.match(t_url).group('login')
+        return res
 
     async def get_games(self, *games: Union[str, int]):
         """|coro|
