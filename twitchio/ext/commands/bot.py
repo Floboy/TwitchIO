@@ -701,6 +701,18 @@ class Bot(Client):
         """
         pass
 
+    async def event_roomstate(self, channel, tags):
+        """|coro|
+
+        Event called when a ROOMSTATE is received from Twitch.
+
+        Parameters
+        ------------
+        user: :class:`.Channel`
+            Channel object containing relevant information to the ROOMSTATE.
+        """
+        pass
+
     async def event_raw_usernotice(self, channel, tags: dict):
         """|coro|
 

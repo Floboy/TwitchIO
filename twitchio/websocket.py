@@ -523,6 +523,9 @@ class WebsocketConnection:
 
             await self._dispatch('userstate', user)
 
+        elif action == 'ROOMSTATE':
+            await self._dispatch('roomstate', channel, tags)
+
         elif action == 'MODE':
             log.debug('ACTION:: MODE')
 
