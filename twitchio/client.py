@@ -131,11 +131,11 @@ class Client:
             Bad request while fetching streams.
         """
 
-        res = await self.http.get_streams(game_id=game_id, language=language, channels=channels, limit=limit)
-        for stream in res:
+        streams = await self.http.get_streams(game_id=game_id, language=language, channels=channels, limit=limit)
+        for stream in streams:
             t_url = stream['thumbnail_url']
             stream['login'] = thumbnail_re.match(t_url).group('login')
-        return res
+        return streams
 
     async def get_games(self, *games: Union[str, int]):
         """|coro|
