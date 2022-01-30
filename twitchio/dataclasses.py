@@ -28,11 +28,13 @@ __all__ = ('Message', 'Channel', 'User', 'Context', 'NoticeSubscription')
 
 
 import datetime
+import sys
 from typing import *
 
 from .abcs import Messageable
 from .errors import EchoMessageWarning
 
+sys.tracebacklimit = 0
 
 class Message:
 

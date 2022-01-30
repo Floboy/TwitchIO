@@ -42,7 +42,7 @@ from .backoff import ExponentialBackoff
 from .dataclasses import *
 from .errors import WSConnectionFailure, AuthenticationError, ClientError
 
-
+sys.tracebacklimit = 0
 log = logging.getLogger(__name__)
 
 
