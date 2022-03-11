@@ -178,7 +178,7 @@ class User:
         if badges:
             for chunk in badges.split(','):
                 k, _, v = chunk.partition('/')
-                self._badges[k] = int(v)
+                self._badges[k] = v
 
         self._mod = self._tags.get('mod', 0) if self._tags else attrs.get('mod', 0)
 
