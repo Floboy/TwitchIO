@@ -309,6 +309,12 @@ class Bot(Client):
         finally:
             self._ws.teardown()
 
+    async def close(self):
+        """
+        Closes Websocket connection.
+        """
+        await self._ws.close()
+
     async def start(self):
         """|coro|
 

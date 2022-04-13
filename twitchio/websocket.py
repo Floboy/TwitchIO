@@ -166,6 +166,12 @@ class WebsocketConnection:
     def is_connected(self) -> bool:
         return self._websocket is not None and self._websocket.open
 
+    async def close(self):
+        """
+        Closes Websocket connection.
+        """
+        await self._websocket.close()
+
     async def _connect(self):
         try:
             self._websocket = await websockets.connect(self._host, timeout=30)
